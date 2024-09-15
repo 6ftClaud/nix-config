@@ -97,10 +97,20 @@
     nano
     curl
     wget
+    docker
     neofetch
     alacritty
     google-chrome
   ];
+
+  users.users = {
+    claud = {
+      # Change via `passwd` after first boot
+      initialPassword = "nixos123";
+      isNormalUser = true;
+      extraGroups = ["wheel" "docker"];
+    };
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
