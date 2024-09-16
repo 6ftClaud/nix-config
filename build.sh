@@ -16,11 +16,6 @@ function success {
     echo -e "${GREEN}[SUCCESS]${NC} $1"
 }
 
-# Ensure the script is run with root privileges
-if [[ "$EUID" -ne 0 ]]; then
-    error "Please run as root"
-fi
-
 # Build and switch NixOS system configuration
 echo "Building and switching NixOS system configuration..."
 if sudo nixos-rebuild switch --flake .#nixos; then

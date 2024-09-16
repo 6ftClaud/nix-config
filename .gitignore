@@ -1,0 +1,3 @@
+.pre-commit-config.yaml
+default.nix
+shell.nix

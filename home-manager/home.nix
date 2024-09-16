@@ -1,74 +1,62 @@
-# This is your home-manager configuration file
-# Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
+#home-manager/home.nix
+{ inputs
+, lib
+, config
+, pkgs
+, ...
+}:
 {
-  inputs,
-  lib,
-  config,
-  pkgs,
-  ...
-}: {
-  # You can import other home-manager modules here
-  imports = [
-    # If you want to use home-manager modules from other flakes (such as nix-colors):
-    # inputs.nix-colors.homeManagerModule
 
-    # You can also split up your configuration and import pieces of it here:
-    # ./nvim.nix
+  imports = [
+    ./dotfiles.nix # Dotfiles configuration
   ];
 
   nixpkgs = {
-    # You can add overlays here
-    overlays = [
-      # If you want to use overlays exported from other flakes:
-      # neovim-nightly-overlay.overlays.default
-
-      # Or define it inline, for example:
-      # (final: prev: {
-      #   hi = final.hello.overrideAttrs (oldAttrs: {
-      #     patches = [ ./change-hello-to-hi.patch ];
-      #   });
-      # })
-    ];
-    # Configure your nixpkgs instance
     config = {
-      # Disable if you don't want unfree packages
       allowUnfree = true;
       # Workaround for https://github.com/nix-community/home-manager/issues/2942
       allowUnfreePredicate = _: true;
     };
   };
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.claud = {
-    isNormalUser = true;
-    description = "Claud";
-    extraGroups = [ "networkmanager" "wheel" "docker"];
-    packages = with pkgs; [
-    flatpak
-    vscode
-    ];
-  };
-
-  # Enable automatic login for the user.
-  services.xserver.displayManager.autoLogin.enable = true;
-  services.xserver.displayManager.autoLogin.user = "claud";
-
-  # TODO: Set your username
   home = {
     username = "claud";
     homeDirectory = "/home/claud";
+    packages = with pkgs; [
+      discord
+      docker-compose
+      flatpak
+      gnomeExtensions.pop-shell
+      signal-desktop
+      steam
+      tidal-hifi
+      vlc
+      vscode
+      tela-icon-theme # Icon Theme
+      volantes-cursors # Cursor Theme
+      nixfmt-rfc-style # Nix formatting tool
+      pre-commit
+    ];
   };
 
-  # Add stuff for your user as you see fit:
-  # programs.neovim.enable = true;
-  # home.packages = with pkgs; [ steam ];
+  # Configure GTK theming
+  gtk = {
+    enable = true;
+    catppuccin = {
+      enable = true;
+      flavor = "mocha";
+      accent = "pink";
+      size = "standard";
+      tweaks = [ "normal" ];
+    };
+  };
 
-  # Enable home-manager and git
+  # Enable home-manager
   programs.home-manager.enable = true;
 
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  home.stateVersion = system.stateVersion;
+  home.stateVersion = "24.05";
 }
