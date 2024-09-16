@@ -27,8 +27,31 @@
   };
 
   # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  # boot.loader.systemd-boot.enable = true;
+  # boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader = {
+    grub = {
+      enable = true;
+      useOSProber = true;
+      efiSupport = true;
+      device = "nodev";
+      extraEntries = ''
+        menuentry "Windows 10" --class windows --class os {
+          insmod part_gpt
+          search --no-floppy --set=root --fs-uuid 4620A3C220A3B6F9
+          chainloader /Windows/Boot/EFI/bootmgfw.efi
+        }
+        menuentry "Reboot" {
+            reboot
+        }
+        menuentry "Poweroff" {
+            halt
+        }
+      '';
+    };
+    efi.canTouchEfiVariables = true;
+  };
+  time.hardwareClockInLocalTime = true; # System time fix for Windows dual boot
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -72,12 +95,8 @@
     enable = true;
     driSupport = true;
     driSupport32Bit = true;
-    extraPackages = with pkgs; [
-      amdvlk
-    ];
-    extraPackages32 = with pkgs; [
-      driversi686Linux.amdvlk
-    ];
+    extraPackages = with pkgs; [ amdvlk ];
+    extraPackages32 = with pkgs; [ driversi686Linux.amdvlk ];
   };
 
   users.defaultUserShell = pkgs.zsh;

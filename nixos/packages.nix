@@ -16,6 +16,7 @@
     nano
     ncdu
     neofetch
+    ntfs3g
     roboto # font
     tree
     vim
@@ -58,4 +59,5 @@
   };
 
   virtualisation.docker.enable = true;
+  virtualisation.docker.liveRestore = false; # Prevents 90 second hang on shutdown - Waiting for process s6-svscan https://github.com/NixOS/nixpkgs/issues/182916#issuecomment-1364504677
 }

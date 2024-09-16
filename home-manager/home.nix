@@ -27,15 +27,16 @@
       docker-compose
       flatpak
       gnomeExtensions.pop-shell
-      signal-desktop
-      steam
-      tidal-hifi
-      vlc
-      vscode
-      tela-icon-theme # Icon Theme
-      volantes-cursors # Cursor Theme
       nixfmt-rfc-style # Nix formatting tool
       pre-commit
+      runelite
+      signal-desktop
+      steam
+      tela-icon-theme # Icon Theme
+      tidal-hifi
+      vlc
+      volantes-cursors # Cursor Theme
+      vscode
     ];
   };
 
