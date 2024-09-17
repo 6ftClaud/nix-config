@@ -16,6 +16,9 @@ function success {
     echo -e "${GREEN}[SUCCESS]${NC} $1"
 }
 
+# Format .nix files
+find * -iname "*.nix" -exec nixfmt {} \;
+
 # Build and switch NixOS system configuration
 echo "Building and switching NixOS system configuration..."
 if sudo nixos-rebuild switch --flake .#nixos; then

@@ -29,7 +29,6 @@
       gnomeExtensions.pop-shell
       nixfmt-rfc-style # Nix formatting tool
       pre-commit
-      runelite
       signal-desktop
       steam
       tela-icon-theme # Icon Theme

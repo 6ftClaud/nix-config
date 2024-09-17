@@ -35,12 +35,8 @@
       useOSProber = true;
       efiSupport = true;
       device = "nodev";
+      theme = "/home/${config.users.users.claud.home}/Code/nix-config/nixos/packages/grub/themes/catppucin-mocha";
       extraEntries = ''
-        menuentry "Windows 10" --class windows --class os {
-          insmod part_gpt
-          search --no-floppy --set=root --fs-uuid 4620A3C220A3B6F9
-          chainloader /Windows/Boot/EFI/bootmgfw.efi
-        }
         menuentry "Reboot" {
             reboot
         }
