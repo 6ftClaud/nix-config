@@ -11,17 +11,15 @@
 
     # Catppuccin
     catppuccin.url = "github:catppuccin/nix";
-
-    # Pre-commit hooks
-    pre-commit-hooks.url = "github:cachix/git-hooks.nix";
   };
 
   outputs =
-    { self
-    , nixpkgs
-    , home-manager
-    , catppuccin
-    , ...
+    {
+      self,
+      nixpkgs,
+      home-manager,
+      catppuccin,
+      ...
     }@inputs:
     let
       supportedSystems = [
@@ -34,17 +32,9 @@
       inherit (nixpkgs.lib) nixosSystem;
     in
     {
-      checks = forAllSystems (system: {
-        pre-commit-check = inputs.pre-commit-hooks.lib.${system}.run {
-          src = ./.;
-          hooks = { };
-        };
-      });
 
       devShells = forAllSystems (system: {
         default = nixpkgs.legacyPackages.${system}.mkShell {
-          inherit (self.checks.${system}.pre-commit-check) shellHook;
-          buildInputs = self.checks.${system}.pre-commit-check.enabledPackages;
         };
       });
 

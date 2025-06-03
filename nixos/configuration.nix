@@ -1,8 +1,9 @@
 #nixos/configuration.nix
-{ config
-, pkgs
-, lib
-, ...
+{
+  config,
+  pkgs,
+  lib,
+  ...
 }:
 
 {
@@ -23,7 +24,7 @@
       flake-registry = "";
       nix-path = config.nix.nixPath;
     };
-    channel.enable = false;
+    channel.enable = lib.mkForce true;
   };
 
   # Bootloader.
@@ -35,7 +36,7 @@
       useOSProber = true;
       efiSupport = true;
       device = "nodev";
-      theme = "/home/${config.users.users.claud.home}/Code/nix-config/nixos/packages/grub/themes/catppucin-mocha";
+      theme = "${config.users.users.claud.home}/Code/nix-config/nixos/packages/grub/themes/catppucin-mocha";
       extraEntries = ''
         menuentry "Reboot" {
             reboot

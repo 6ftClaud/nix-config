@@ -3,8 +3,8 @@
 
 {
   imports = [
-    packages/gnome.nix # Gnome DE
-    packages/hyprland.nix # Hyprland WM
+    packages/de/gnome.nix # Gnome DE
+    packages/de/hyprland.nix # Hyprland WM
   ];
 
   environment.systemPackages = with pkgs; [

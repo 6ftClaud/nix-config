@@ -1,4 +1,4 @@
-#nixos/packages/gnome.nix
+#nixos/packages/de/gnome.nix
 
 { pkgs, ... }:
 

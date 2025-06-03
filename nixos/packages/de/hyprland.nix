@@ -1,4 +1,4 @@
-#nixos/packages/hyprland.nix
+#nixos/packages/de/hyprland.nix
 { pkgs, ... }:
 
 {

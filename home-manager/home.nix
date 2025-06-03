@@ -1,9 +1,10 @@
 #home-manager/home.nix
-{ inputs
-, lib
-, config
-, pkgs
-, ...
+{
+  inputs,
+  lib,
+  config,
+  pkgs,
+  ...
 }:
 {
 
@@ -23,12 +24,13 @@
     username = "claud";
     homeDirectory = "/home/claud";
     packages = with pkgs; [
+      calibre
       discord
       docker-compose
       flatpak
       gnomeExtensions.pop-shell
-      nixfmt-rfc-style # Nix formatting tool
-      pre-commit
+      protonvpn-gui
+      python3
       signal-desktop
       steam
       tela-icon-theme # Icon Theme
