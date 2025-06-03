@@ -29,10 +29,8 @@
       docker-compose
       flatpak
       gnomeExtensions.pop-shell
-      protonvpn-gui
       python3
       signal-desktop
-      steam
       tela-icon-theme # Icon Theme
       tidal-hifi
       vlc
